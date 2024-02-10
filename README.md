@@ -1,1 +1,1 @@
-# Full Stack Expo Notifications
+# Full Stack Expo Notifications X Apollo Server Integration
