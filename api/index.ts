@@ -1,7 +1,6 @@
 import { ApolloServer, gql } from "apollo-server";
 import Expo, { ExpoPushMessage } from "expo-server-sdk";
 
-// Create a new Expo SDK client
 let expo = new Expo();
 
 interface Notification {
@@ -10,7 +9,7 @@ interface Notification {
   read: boolean;
 }
 
-let pushToken: string; // This holds registered push tokens
+let pushToken: string; // This holds our registered push token
 let notifications: Notification[] = [
   { id: "1", message: "Hello World", read: false },
 ];
@@ -65,7 +64,6 @@ const resolvers = {
       if (delay) {
         await delaySeconds(delay);
       }
-      // Assuming you're sending the notification to the first token in the array for demonstration
       if (pushToken && Expo.isExpoPushToken(pushToken)) {
         const message: ExpoPushMessage = {
           to: pushToken, // The recipient push token
@@ -75,7 +73,7 @@ const resolvers = {
         };
 
         try {
-          await expo.sendPushNotificationsAsync([message]); // Note: Sending a single message
+          await expo.sendPushNotificationsAsync([message]);
           console.log("Notification sent successfully");
         } catch (error) {
           console.error("Error sending notification:", error);
